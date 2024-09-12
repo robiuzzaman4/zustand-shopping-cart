@@ -1,11 +1,12 @@
-import Container from "@/components/ui/container";
 import React from "react";
+import Hero from "@/components/hero";
+import Container from "@/components/container";
 
 const HomePage = () => {
   return (
     <section className="w-full py-16">
       <Container>
-        <h1 className="text-3xl font-medium tracking-tighter">Home Page</h1>
+        <Hero />
       </Container>
     </section>
   );

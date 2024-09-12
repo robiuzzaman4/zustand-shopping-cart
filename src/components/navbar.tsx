@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "@/components/ui/container";
+import Container from "@/components/container";
 import Link from "next/link";
 import { ShoppingBag, ShoppingCart } from "lucide-react";
 
