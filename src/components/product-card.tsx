@@ -3,13 +3,7 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  img: string;
-}
+import { Product } from "@/types";
 
 interface ProductCardProps {
   product: Product;

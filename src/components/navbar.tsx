@@ -2,6 +2,7 @@ import React from "react";
 import Container from "@/components/container";
 import Link from "next/link";
 import { ShoppingBag, ShoppingCart } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   return (
@@ -14,9 +15,12 @@ const Navbar = () => {
           <ShoppingBag />
           Zustify
         </Link>
-        <Link href="/cart">
-          <ShoppingCart />
-        </Link>
+        <Button asChild variant="outline" size="sm" className="rounded-full">
+          <Link href="/cart" className="flex items-center justify-center gap-2">
+            <ShoppingCart size={16} />
+            <p>0</p>
+          </Link>
+        </Button>
       </Container>
     </nav>
   );
