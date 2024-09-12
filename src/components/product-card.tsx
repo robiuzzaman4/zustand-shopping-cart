@@ -13,7 +13,9 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const { cartItems, addToCart } = useCartStore((state) => state);
+  const { cartItems, addToCart, removeFromCart } = useCartStore(
+    (state) => state
+  );
   const singleItem = cartItems?.find((item) => item?.id === product?.id);
 
   return (
@@ -35,7 +37,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
           {singleItem && singleItem?.quantity > 0 ? (
             <span className="w-full grid grid-cols-5 gap-3">
-              <Button variant="outline">
+              <Button
+                onClick={() => removeFromCart(product?.id)}
+                variant="outline"
+              >
                 <Minus size={16} className="shrink-0" />
               </Button>
               <div className="col-span-3 h-full w-full grid place-items-center">
