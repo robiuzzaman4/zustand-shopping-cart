@@ -1,3 +1,9 @@
 ## **Zustand Shopping Cart**
 
-### **Handnds on** 
+### **Used Technologies:**
+
+- **Next.js**
+- **TypeScript**
+- **Tailwind CSS**
+- **Shadcn Ui**
+- **Zustand**
