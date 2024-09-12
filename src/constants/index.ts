@@ -9,7 +9,7 @@ export const PRODUCTS = [
     id: "2",
     name: "Banana",
     img: "/images/banana.svg",
-    price: 6,
+    price: 3,
   },
   {
     id: "4",
