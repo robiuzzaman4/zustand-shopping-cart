@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
+import { Toaster } from "sonner";
 
 const sans = Poppins({
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -27,6 +28,7 @@ export default function RootLayout({
           <Navbar />
           {children}
         </div>
+        <Toaster className="font-sans" position="top-center" duration={1500} />
       </body>
     </html>
   );

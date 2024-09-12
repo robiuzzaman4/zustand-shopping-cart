@@ -1,4 +1,5 @@
 import { Product } from "@/types";
+import { toast } from "sonner";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -39,6 +40,9 @@ export const useCartStore = create<TState & TActions>()(
           set({
             cartItems: updatedCartItems,
           });
+          toast.success(
+            `Item added: ${product?.name} - ${existingItem?.quantity + 1}`
+          );
         } else {
           set({
             cartItems: [
@@ -46,6 +50,9 @@ export const useCartStore = create<TState & TActions>()(
               { ...product, quantity: product?.quantity + 1 },
             ],
           });
+          toast.success(
+            `Item added: ${product?.name} - ${product?.quantity + 1}`
+          );
         }
       },
       // remove from cart actions
@@ -63,10 +70,20 @@ export const useCartStore = create<TState & TActions>()(
             set({
               cartItems: updatedCartItems,
             });
+            toast.success(
+              `Item removed: ${existingItem?.name} - ${
+                existingItem?.quantity - 1
+              }`
+            );
           } else {
             set({
               cartItems: cartItems.filter((item) => item.id !== itemId),
             });
+            toast.success(
+              `Item removed: ${existingItem?.name} - ${
+                existingItem?.quantity - 1
+              }`
+            );
           }
         }
       },
