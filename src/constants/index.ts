@@ -7,14 +7,14 @@ export const PRODUCTS = [
   },
   {
     id: "2",
-    name: "Orange",
-    img: "/images/orange.svg",
-    price: 9,
-  },
-  {
-    id: "4",
     name: "Banana",
     img: "/images/banana.svg",
     price: 6,
+  },
+  {
+    id: "4",
+    name: "Orange",
+    img: "/images/orange.svg",
+    price: 9,
   },
 ];
