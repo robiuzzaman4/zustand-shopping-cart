@@ -1,4 +1,4 @@
-## **Zustand Shopping Cart**
+## **Zustify - Zustand Shopping Cart**
 
 ### **Used Technologies:**
 
