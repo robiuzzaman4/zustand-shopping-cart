@@ -1,10 +1,10 @@
 import { Product } from "@/types";
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 // state types
 export type TState = {
   cartItems: Product[];
-  toatalCartItems: number;
   toatalCartItemsPrice: number;
 };
 
@@ -17,43 +17,47 @@ type TActions = {
 
 const INITIAL_STATE: TState = {
   cartItems: [],
-  toatalCartItems: 0,
   toatalCartItemsPrice: 0,
 };
 
-export const useCartStore = create<TState & TActions>()((set, get) => ({
-  cartItems: INITIAL_STATE.cartItems,
-  toatalCartItems: INITIAL_STATE.toatalCartItems,
-  toatalCartItemsPrice: INITIAL_STATE.toatalCartItemsPrice,
+export const useCartStore = create<TState & TActions>()(
+  persist(
+    (set, get) => ({
+      cartItems: INITIAL_STATE.cartItems,
+      toatalCartItemsPrice: INITIAL_STATE.toatalCartItemsPrice,
 
-  // add to cart actions
-  addToCart: (product: Product) => {
-    const cartItems = get().cartItems;
-    const existingItem = cartItems?.find((item) => item?.id === product?.id);
+      // add to cart actions
+      addToCart: (product: Product) => {
+        const cartItems = get().cartItems;
+        const existingItem = cartItems?.find(
+          (item) => item?.id === product?.id
+        );
 
-    if (existingItem) {
-      const updatedCart = cartItems.map((item) =>
-        item?.id === product?.id
-          ? { ...item, quantity: item?.quantity + 1 }
-          : item
-      );
-      console.log("hitted", updatedCart);
-      set({
-        cartItems: updatedCart,
-        toatalCartItems: get().toatalCartItems + 1,
-        toatalCartItemsPrice: get().toatalCartItemsPrice + product?.price,
-      });
-    } else {
-      set({
-        cartItems: [
-          ...cartItems,
-          { ...product, quantity: product?.quantity + 1 },
-        ],
-        toatalCartItems: get().toatalCartItems + 1,
-        toatalCartItemsPrice: get().toatalCartItemsPrice + product?.price,
-      });
+        if (existingItem) {
+          const updatedCartItems = cartItems.map((item) =>
+            item?.id === product?.id
+              ? { ...item, quantity: item?.quantity + 1 }
+              : item
+          );
+          set({
+            cartItems: updatedCartItems,
+            toatalCartItemsPrice: get().toatalCartItemsPrice + product?.price,
+          });
+        } else {
+          set({
+            cartItems: [
+              ...cartItems,
+              { ...product, quantity: product?.quantity + 1 },
+            ],
+            toatalCartItemsPrice: get().toatalCartItemsPrice + product?.price,
+          });
+        }
+      },
+      // removeFromCart: (itemId: string) => ({}),
+      // deleteFromItem: (itemId: string) => ({}),
+    }),
+    {
+      name: "cart-storage", // Unique name in localStorage
     }
-  },
-  // removeFromCart: (itemId: string) => ({}),
-  // deleteFromItem: (itemId: string) => ({}),
-}));
+  )
+);

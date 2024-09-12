@@ -14,7 +14,7 @@ export const PRODUCTS = [
     quantity: 0,
   },
   {
-    id: "4",
+    id: "3",
     name: "Orange",
     img: "/images/orange.svg",
     price: 9,

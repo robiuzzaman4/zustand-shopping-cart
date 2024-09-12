@@ -3,7 +3,7 @@
 import React from "react";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { Product } from "@/types";
 import { useCartStore } from "@/store/cart-store";
@@ -13,8 +13,8 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const { cartItems, addToCart, toatalCartItems, toatalCartItemsPrice } = useCartStore((state) => state);
-  console.log("cartItems", cartItems, toatalCartItems, "$" + toatalCartItemsPrice);
+  const { cartItems, addToCart } = useCartStore((state) => state);
+  const singleItem = cartItems?.find((item) => item?.id === product?.id);
 
   return (
     <div className="bg-secondary p-1 rounded-xl">
@@ -32,24 +32,27 @@ const ProductCard = ({ product }: ProductCardProps) => {
             className="aspect-square rounded-md"
             priority
           />
-          <Button
-            onClick={() => addToCart(product)}
-            className="w-full flex items-center justify-center gap-2"
-          >
-            Add to Cart <ShoppingCart size={16} />{" "}
-          </Button>
 
-          <span className="w-full hidden grid-cols-5 gap-3">
-            <Button variant="outline">
-              <Minus size={16} className="shrink-0" />
+          {singleItem && singleItem?.quantity > 0 ? (
+            <span className="w-full grid grid-cols-5 gap-3">
+              <Button variant="outline">
+                <Minus size={16} className="shrink-0" />
+              </Button>
+              <div className="col-span-3 h-full w-full grid place-items-center">
+                <CardTitle>{singleItem?.quantity}</CardTitle>
+              </div>
+              <Button variant="outline" onClick={() => addToCart(product)}>
+                <Plus size={16} className="shrink-0" />
+              </Button>
+            </span>
+          ) : (
+            <Button
+              onClick={() => addToCart(product)}
+              className="w-full flex items-center justify-center gap-2"
+            >
+              Add to Cart <ShoppingCart size={16} />{" "}
             </Button>
-            <div className="col-span-3 h-full w-full grid place-items-center">
-              <CardTitle>1</CardTitle>
-            </div>
-            <Button>
-              <Plus size={16} className="shrink-0" />
-            </Button>
-          </span>
+          )}
         </CardContent>
       </Card>
     </div>
