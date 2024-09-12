@@ -1,15 +1,21 @@
+"use client";
+
 import React from "react";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { Product } from "@/types";
+import { useCartStore } from "@/store/cart-store";
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const { cartItems, addToCart, toatalCartItems, toatalCartItemsPrice } = useCartStore((state) => state);
+  console.log("cartItems", cartItems, toatalCartItems, "$" + toatalCartItemsPrice);
+
   return (
     <div className="bg-secondary p-1 rounded-xl">
       <Card className="rounded-lg shadow">
@@ -24,8 +30,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
             height={1080}
             width={1080}
             className="aspect-square rounded-md"
+            priority
           />
-          <Button className="w-full flex items-center justify-center gap-2">
+          <Button
+            onClick={() => addToCart(product)}
+            className="w-full flex items-center justify-center gap-2"
+          >
             Add to Cart <ShoppingCart size={16} />{" "}
           </Button>
 
