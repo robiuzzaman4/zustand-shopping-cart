@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 import { Trash } from "lucide-react";
 
 const CartItems = () => {
-  const { cartItems } = useCartStore((state) => state);
+  const { cartItems, deleteFromCart } = useCartStore((state) => state);
   return (
     <div className="w-full grid gap-6">
       {cartItems?.map((item) => (
@@ -35,6 +35,7 @@ const CartItems = () => {
               </span>
             </div>
             <Button
+              onClick={() => deleteFromCart(item?.id)}
               className="absolute top-0 right-6 text-rose-500 hover:text-rose-500"
               variant="outline"
               size="sm"

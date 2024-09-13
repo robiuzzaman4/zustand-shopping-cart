@@ -12,7 +12,7 @@ export type TState = {
 type TActions = {
   addToCart: (product: Product) => void; // add product
   removeFromCart: (itemId: string) => void; // remove product quantity
-  // deleteFromItem: (itemId: string) => void; // delete product
+  deleteFromCart: (itemId: string) => void; // delete product
 };
 
 const INITIAL_STATE: TState = {
@@ -87,7 +87,20 @@ export const useCartStore = create<TState & TActions>()(
           }
         }
       },
-      // deleteFromItem: (itemId: string) => ({}),
+      // delete from cart actions
+      deleteFromCart: (itemId: string) => {
+        const cartItems = get().cartItems;
+        const existingItem = cartItems?.find((item) => item?.id === itemId);
+
+        if (existingItem) {
+          set({
+            cartItems: cartItems?.filter((item) => item?.id !== itemId),
+          });
+          toast.success(
+            `Item deleted from cart`
+          );
+        }
+      },
     }),
     {
       name: "cart-storage", // Unique name in localStorage
