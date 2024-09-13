@@ -7,16 +7,14 @@ const Hero = () => {
     <div className="w-full max-w-xl mx-auto grid place-items-center gap-6 py-20">
       <span className="grid gap-2">
         <h1 className="text-3xl md:text-4xl font-medium tracking-tighter text-center md:leading-tight">
-          Zustify - world best online shopping center.
+          Zustify - state management with next.js & zustand.
         </h1>
         <p className="text-sm font-normal text-muted-foreground text-center">
-          Browse, add to cart, and shop effortlessly, all in one place!
+          An example of shopping cart state management with next.js, typescript & zustand.
         </p>
       </span>
       <Button asChild className="rounded-full">
-        <Link href="#products">
-          Explore Now
-        </Link>
+        <Link href="#products">Explore Now</Link>
       </Button>
     </div>
   );
