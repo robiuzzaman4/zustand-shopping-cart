@@ -1,6 +1,12 @@
 import CartItems from "@/components/cart-items";
 import Container from "@/components/container";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Shopping Cart",
+  description: "Shopping Cart Items",
+};
 
 const CartPage = () => {
   return (
